@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: app
+  name: app
+  namespace: default
+spec:
+  selector:
+    matchLabels:
+      app: app
+  template:
+    metadata:
+      labels:
+        app: app
+    spec:
+      containers:
+      - image: asia.gcr.io/oozou-interview/devops-test:dev
+        imagePullPolicy: IfNotPresent
+        name: devops-test
+        resources: {}
+        env:
+        - name: STATD_HOST
+          value: "graphite"
+        - name: STATD_PORT
+          value: "8125"
